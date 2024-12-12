@@ -27,7 +27,7 @@ export default function Login() {
 
       const response = await login(email, password);
 
-      if (response.statusText === "OK") {
+      if (response) {
         setLoading(false);
         window.localStorage.setItem("jwt", response.data.token);
         navigate("/dashboard");

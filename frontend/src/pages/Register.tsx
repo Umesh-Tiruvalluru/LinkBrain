@@ -23,7 +23,7 @@ function Register() {
 
       const response = await register(email, password);
 
-      if (response.statusText === "Created") {
+      if (response) {
         setLoading(false);
         navigate("/login");
       }
