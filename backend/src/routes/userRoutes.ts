@@ -102,7 +102,7 @@ userRouter.post("/login", async (req, res) => {
       process.env.JWT_SECRET || ""
     );
 
-    res.json({ token });
+    res.status(200).json({ token });
   } catch (e) {
     res.status(411).json({ message: "User already exists" });
   }

@@ -24,10 +24,9 @@ function Register() {
       const response = await register(email, password);
 
       if (response.statusText === "Created") {
+        setLoading(false);
         navigate("/login");
       }
-
-      setLoading(false);
     } catch (e) {
       console.error(e);
     }

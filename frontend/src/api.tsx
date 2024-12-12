@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const BACKEND_URL = "https://linkbrain.onrender.com/api/v1";
 
 export async function register(email: string, password: string) {
@@ -18,7 +17,6 @@ export async function login(email: string, password: string) {
   });
 
   window.localStorage.setItem("jwt", response.data.token);
-
   return response;
 }
 

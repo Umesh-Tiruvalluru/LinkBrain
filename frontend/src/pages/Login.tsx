@@ -4,7 +4,7 @@ import Input from "../ui/Input";
 import WelcomeBanner from "../ui/WelcomeBanner";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
-import axios from "axios";
+import { login } from "../api";
 
 export default function Login() {
   const emailRef = useRef<HTMLFormElement>();
@@ -24,13 +24,8 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const response = await axios.post(
-        "https://linkbrain.onrender.com/api/v1/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
+
+      const response = await login(email, password);
 
       if (response.statusText === "OK") {
         setLoading(false);
