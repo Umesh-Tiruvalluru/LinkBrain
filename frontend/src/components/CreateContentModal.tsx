@@ -4,7 +4,6 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import axios from "axios";
 import InputChip from "./InputChip";
-import Chip from "../ui/Chip";
 
 interface CreateContentModalProps {
   open: boolean;
@@ -60,7 +59,6 @@ const CreateContentModal: React.FC<CreateContentModalProps> = ({
       <form className="space-y-3 mt-7" onSubmit={handleSubmit}>
         <p className="font-medium">Add Content</p>
         <Input type="text" placeholder="Title" reference={titleRef} />
-        {/* <Input type="text" placeholder="Type" reference={typeRef} /> */}
         <select
           name=""
           id=""
@@ -77,7 +75,9 @@ const CreateContentModal: React.FC<CreateContentModalProps> = ({
         <textarea
           placeholder="Description (optional)"
           rows={3}
-          ref={descriptionRef}
+          ref={
+            descriptionRef as unknown as React.LegacyRef<HTMLTextAreaElement>
+          }
           className="w-full border border-gray-300 text-sm
           rounded-md focus:ring-blue-500 p-2 focus:border-blue-500"
         ></textarea>

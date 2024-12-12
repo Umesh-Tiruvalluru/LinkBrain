@@ -7,12 +7,6 @@ import MaxWidthWrapper from "../components/MaxWidthWrapper";
 import Navbar from "../components/Navbar";
 import Button from "../ui/Button";
 import ShareBrainModal from "../components/ShareBrainModal.js";
-import Chip from "../ui/Chip.tsx";
-import InputChip from "../components/InputChip.tsx";
-
-//export function loader() {
-//  return getData();
-//}
 
 const Dashboard = () => {
   const [modal, setModal] = React.useState<boolean>(false);

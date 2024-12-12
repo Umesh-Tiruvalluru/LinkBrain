@@ -1,13 +1,6 @@
 import Logo from "./Logo";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import {
-  Cross,
-  LogOut,
-  Menu,
-  Search,
-  SlidersHorizontal,
-  X,
-} from "lucide-react";
+import { LogOut, Menu, Search, SlidersHorizontal, X } from "lucide-react";
 import Button from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
