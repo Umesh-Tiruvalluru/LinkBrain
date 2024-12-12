@@ -4,7 +4,7 @@ const BACKEND_URL = "https://linkbrain.onrender.com/api/v1";
 
 export async function register(email: string, password: string) {
   const response = await axios.post(`${BACKEND_URL}/register`, {
-    usernname: email,
+    email: email,
     password: password,
   });
 
@@ -13,7 +13,7 @@ export async function register(email: string, password: string) {
 
 export async function login(email: string, password: string) {
   const response = await axios.post(`${BACKEND_URL}/login`, {
-    usernmae: email,
+    email: email,
     password: password,
   });
 

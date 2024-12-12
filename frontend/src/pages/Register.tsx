@@ -20,6 +20,7 @@ function Register() {
     try {
       const email = emailRef.current?.value!;
       const password = passwordRef.current?.value!;
+
       const response = await register(email, password);
 
       if (response.statusText === "Created") {
