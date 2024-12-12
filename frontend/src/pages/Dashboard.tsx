@@ -21,14 +21,15 @@ const Dashboard = () => {
     setShareBrainModal(false);
   }
 
-  async function fetchData() {
-    const content = await getData();
-    setData(content);
-  }
-
   React.useEffect(() => {
     fetchData();
   }, []);
+
+  async function fetchData() {
+    const content = await getData();
+    setData(content);
+    close();
+  }
 
   return (
     <div className="bg-gray-200">
@@ -36,7 +37,11 @@ const Dashboard = () => {
       {/* <Sidebar /> */}
       <MaxWidthWrapper>
         <div className="mt-11 space-y-8 min-h-screen">
-          <CreateContentModal open={modal} onClose={onClose} />
+          <CreateContentModal
+            // setData={setData}
+            open={modal}
+            onClose={onClose}
+          />
           <ShareBrainModal open={shareBrainModal} onClose={close} />
           <div className="flex flex-wrap  items-center justify-between gap-5 mt-0 sm:mt-3">
             <p className="text-2xl block font-bold">

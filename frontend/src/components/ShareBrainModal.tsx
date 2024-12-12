@@ -13,6 +13,7 @@ const ShareBrainModal: React.FC<ShareBrainModalProps> = ({ open, onClose }) => {
 
   async function fetchHash() {
     const response = await isLinkExist();
+    console.log(response);
     setHash(response);
   }
 
@@ -32,7 +33,7 @@ const ShareBrainModal: React.FC<ShareBrainModalProps> = ({ open, onClose }) => {
           <h1 className="text-2xl font-bold ">Copy the link below</h1>
           <input
             type="text"
-            value={`https://linkbrain.onrender.com/brain/${hash}`}
+            value={`https://localhost:8080/brain/${hash}`}
             readOnly
           />
           <Button

@@ -14,8 +14,8 @@ function Share() {
       if (!shareId) return;
       try {
         const res = await getShareData(shareId);
-        console.log(res.data);
-        setData(res.data);
+        console.log(res?.data);
+        setData(res?.data);
       } catch (e) {
         console.error(e);
       }

@@ -72,7 +72,10 @@ export async function isLinkExist() {
   return response.data.res;
 }
 
-export async function getShareData(shareId: string | undefined) {
+export async function getShareData(shareId: string) {
+  if (!shareId) {
+    return;
+  }
   const response = await axios.get(`${BACKEND_URL}/brain/${shareId}`);
 
   return response;

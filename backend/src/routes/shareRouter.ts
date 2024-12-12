@@ -39,9 +39,8 @@ shareRouter.post("/share", userMiddleware, async (req, res) => {
   }
 });
 
-shareRouter.get("/share", userMiddleware, async (req, res) => {
+shareRouter.get("/share", async (req, res) => {
   const userId = req.userId;
-
   try {
     const response = await LinkModel.find({ userId });
 

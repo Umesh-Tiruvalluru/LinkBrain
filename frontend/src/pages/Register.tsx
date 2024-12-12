@@ -9,8 +9,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { register } from "../api";
 
 function Register() {
-  const emailRef = React.useRef<HTMLInputElement>();
-  const passwordRef = React.useRef<HTMLInputElement>();
+  const emailRef = React.useRef<HTMLFormElement>();
+  const passwordRef = React.useRef<HTMLFormElement>();
   const [loading, setLoading] = React.useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -18,8 +18,8 @@ function Register() {
     e.preventDefault();
     setLoading(true);
     try {
-      const email = emailRef.current?.value!;
-      const password = passwordRef.current?.value!;
+      const email = emailRef.current?.value;
+      const password = passwordRef.current?.value;
 
       const response = await register(email, password);
 
@@ -52,7 +52,7 @@ function Register() {
               Welcome back
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Log in to continue managing your resources
+              Register to create an account
             </p>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
