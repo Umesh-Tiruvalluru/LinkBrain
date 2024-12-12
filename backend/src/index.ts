@@ -8,7 +8,7 @@ import * as dotenv from "dotenv";
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: "https://linkbrain-frontend.onrender.com/" }));
+app.use(cors({ origin: "https://linkbrain-frontend.onrender.com" }));
 
 dotenv.config();
 const port = process.env.PORT || 4000;
