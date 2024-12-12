@@ -5,7 +5,8 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import WelcomeBanner from "../ui/WelcomeBanner";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import { register } from "../api";
 
 function Register() {
   const emailRef = React.useRef<HTMLInputElement>();
@@ -16,17 +17,10 @@ function Register() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    const email = emailRef.current?.value;
-    const password = passwordRef.current?.value;
-
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/register",
-        {
-          email,
-          password,
-        }
-      );
+      const email = emailRef.current?.value!;
+      const password = passwordRef.current?.value!;
+      const response = await register(email, password);
 
       if (response.statusText === "Created") {
         navigate("/login");
@@ -49,7 +43,7 @@ function Register() {
             <div className="flex flex-col items-center gap-3 justify-center">
               <div className="bg-gradient-to-r from-indigo-600 to-purple-900 p-2 rounded-lg">
                 <Brain size={32} strokeWidth={2.5} className="text-white" />
-               </div>
+              </div>
               <p className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-900 bg-clip-text text-transparent">
                 LinkBrain
               </p>
@@ -93,7 +87,7 @@ function Register() {
               <div className="text-sm cursor-pointer underline">
                 Forgot your password?
               </div>
-            </div>*/ }
+            </div>*/}
 
             <div>
               <Button

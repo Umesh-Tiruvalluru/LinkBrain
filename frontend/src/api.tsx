@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://linkbrain.onrender.com";
+const BACKEND_URL = "https://linkbrain.onrender.com/api/v1";
 
 export async function register(email: string, password: string) {
   const response = await axios.post(`${BACKEND_URL}/register`, {
@@ -18,6 +18,31 @@ export async function login(email: string, password: string) {
   });
 
   window.localStorage.setItem("jwt", response.data.token);
+
+  return response;
+}
+
+export async function createContent(
+  title: string,
+  type: string,
+  tags: string[],
+  description: string,
+  link: string
+) {
+  const response = await axios.post(
+    `${BACKEND_URL}/content`,
+    {
+      title,
+      type,
+      tags,
+      description,
+      link,
+    },
+    {
+      headers: { Authorization: localStorage.getItem("jwt") },
+    }
+  );
+
   return response;
 }
 

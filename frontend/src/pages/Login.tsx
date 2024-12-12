@@ -24,15 +24,16 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:8080/api/v1/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://linkbrain.onrender.com/api/v1/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
-      setLoading(false);
-
-      console.log(response.statusText);
       if (response.statusText === "OK") {
+        setLoading(false);
         window.localStorage.setItem("jwt", response.data.token);
         navigate("/dashboard");
       }

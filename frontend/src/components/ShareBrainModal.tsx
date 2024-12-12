@@ -8,57 +8,56 @@ interface ShareBrainModalProps {
   onClose: () => void;
 }
 
-
-const ShareBrainModal: React.FC<ShareBrainModalProps> = ({open, onClose}) => {
+const ShareBrainModal: React.FC<ShareBrainModalProps> = ({ open, onClose }) => {
   const [hash, setHash] = React.useState<string | undefined>(undefined);
 
-
-  async function fetchHash () {
+  async function fetchHash() {
     const response = await isLinkExist();
-    setHash(response)
-
+    setHash(response);
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     fetchHash();
-  }, [hash])
+  }, [hash]);
 
-
-  async function handleClick   (s:boolean) {
+  async function handleClick(s: boolean) {
     const response = await share(s);
     setHash(response);
   }
 
   return (
     <Modal open={open} onClose={onClose}>
-      {
-        hash ? (
-          <div>
-             <h1 className="text-2xl font-bold ">Copy the link below</h1>
-             <input type="text" value={`http://localhost:5173/brain/${hash}`} readOnly />
-             <Button 
-              className="mt-4"
-             variant="primary"
-             text="Stop Sharing"
-             onClick={() => handleClick(false)}
-             />
-          </div>
-        ): (
-          <div className="my-4">
-              <h1 className="text-2xl font-bold">Share Your Brain🧠✨</h1>
-              <p className="font-medium text-gray-600">Inspire others by sharing your resources and ideas</p>
-              <Button
-                className="mt-4"
-                variant="primary"
-                text="Genrate Link"
-                onClick={() => handleClick(true)}
-              />
-          </div>
-        )
-      }
+      {hash ? (
+        <div>
+          <h1 className="text-2xl font-bold ">Copy the link below</h1>
+          <input
+            type="text"
+            value={`https://linkbrain.onrender.com/brain/${hash}`}
+            readOnly
+          />
+          <Button
+            className="mt-4"
+            variant="primary"
+            text="Stop Sharing"
+            onClick={() => handleClick(false)}
+          />
+        </div>
+      ) : (
+        <div className="my-4">
+          <h1 className="text-2xl font-bold">Share Your Brain🧠✨</h1>
+          <p className="font-medium text-gray-600">
+            Inspire others by sharing your resources and ideas
+          </p>
+          <Button
+            className="mt-4"
+            variant="primary"
+            text="Genrate Link"
+            onClick={() => handleClick(true)}
+          />
+        </div>
+      )}
     </Modal>
-
-  ); 
-}
+  );
+};
 
 export default ShareBrainModal;

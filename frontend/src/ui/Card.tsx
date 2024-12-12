@@ -12,9 +12,12 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ data }) => {
   const onDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/v1/content/${data._id}`, {
-        headers: { Authorization: localStorage.getItem("jwt") },
-      });
+      await axios.delete(
+        `https://linkbrain.onrender.com/api/v1/content/${data._id}`,
+        {
+          headers: { Authorization: localStorage.getItem("jwt") },
+        }
+      );
     } catch (e) {
       console.error("Error deleting content:", e);
     }

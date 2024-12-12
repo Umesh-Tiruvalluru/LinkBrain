@@ -4,6 +4,7 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import axios from "axios";
 import InputChip from "./InputChip";
+import { createContent } from "../api";
 
 interface CreateContentModalProps {
   open: boolean;
@@ -27,23 +28,17 @@ const CreateContentModal: React.FC<CreateContentModalProps> = ({
     const type = typeRef.current?.value;
     const link = linkRef.current?.value;
     const description = descriptionRef.current?.value;
+    //bugs
     try {
       setLoading(true);
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/content",
-        {
-          title,
-          type,
-          tags: chips,
-          description,
-          link,
-        },
-        {
-          headers: { Authorization: localStorage.getItem("jwt") },
-        }
-      );
 
-      console.log(response.statusText);
+      const response = await createContent(
+        title,
+        type,
+        chips,
+        description,
+        link
+      );
 
       setLoading(false);
       if (response.statusText === "OK") {
