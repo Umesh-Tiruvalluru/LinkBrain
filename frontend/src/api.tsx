@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://linkbrain.onrender.com";
+const BACKEND_URL = "https://linkbrain.onrender.com/api/v1";
 
 export async function register(email: string, password: string) {
   const response = await axios.post(`${BACKEND_URL}/register`, {
