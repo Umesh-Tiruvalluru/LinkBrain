@@ -2,26 +2,25 @@ import React from "react";
 import { ExternalLink, Trash } from "lucide-react";
 import Tag from "../components/Tag";
 import { formatDate } from "../utilis";
-import axios from "axios";
 import { CardData } from "../types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { onDelete } from "../api";
+import toast from "react-hot-toast";
 
 interface CardProps {
   data: CardData;
 }
 
 const Card: React.FC<CardProps> = ({ data }) => {
-  const onDelete = async () => {
-    try {
-      await axios.delete(
-        `https://linkbrain.onrender.com/api/v1/content/${data._id}`,
-        {
-          headers: { Authorization: localStorage.getItem("jwt") },
-        }
-      );
-    } catch (e) {
-      console.error("Error deleting content:", e);
-    }
-  };
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: () => onDelete(data._id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["content"] });
+      toast.success("Successfully Deleted");
+    },
+  });
 
   function correctedLink(link: string): string {
     if (link.includes("youtu.be")) {
@@ -41,7 +40,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
             <a href={data.link} target="_blank" rel="noopener noreferrer">
               <ExternalLink size={16} strokeWidth={2.5} />
             </a>
-            <button onClick={onDelete}>
+            <button onClick={() => mutate()}>
               <Trash size={16} strokeWidth={2.5} className="text-red-600" />
             </button>
           </div>
@@ -51,7 +50,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </time>
       </div>
       <p className="text-gray-500 mb-4 flex-grow">{data.description}</p>
-      <div className="mb-4 overflow-hidden">
+      <div className="mb-4 max-h-44 overflow-x-clip overflow-y-hidden">
         {data.type === "youtube" && (
           <div className="aspect-w-16 aspect-h-9">
             <iframe

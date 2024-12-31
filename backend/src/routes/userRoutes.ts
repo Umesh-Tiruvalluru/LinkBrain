@@ -16,11 +16,13 @@ const userSchema = z.object({
 
 userRouter.post("/register", async (req, res) => {
   const validation = userSchema.safeParse(req.body);
+
+  if (!validation.success) {
+    res.status(400).json({ errors: validation.error.errors });
+    return;
+  }
+
   try {
-    if (!validation.success) {
-      res.status(400).json({ errors: validation.error.errors });
-      return;
-    }
     const { email, password } = validation.data;
     const hashedPassword = await bcrypt.hash(password, 5);
     await UserModel.create({
@@ -33,54 +35,15 @@ userRouter.post("/register", async (req, res) => {
   }
 });
 
-// userRouter.post("/register", async (req, res) => {
-//   console.log("hi");
-//   try {
-//     const validation = userSchema.safeParse(req.body);
-
-//     if (!validation.success) {
-//       res.status(400).json({ errors: validation.error.errors });
-//       return;
-//     }
-
-//     const email: string = validation.data.email;
-//     const password: string = validation.data.password;
-//     const hashedPassword = await bcrypt.hash(password, 5);
-
-//     console.log(email, hashedPassword);
-
-//     await UserModel.create({
-//       email,
-//       password: hashedPassword,
-//     });
-//     console.log(email, hashedPassword);
-
-//     res.status(201).json({
-//       message: "User Signed Up",
-//     });
-//   } catch (e: any) {
-//     console.error("Error during user registration:", e);
-
-//     // Handle duplicate key error (email already exists)
-//     if (e.code === 11000) {
-//       res.status(409).json({ message: "User already exists" });
-//       return;
-//     }
-
-//     // Handle unexpected errors
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
-
 userRouter.post("/login", async (req, res) => {
   const validation = userSchema.safeParse(req.body);
 
-  try {
-    if (!validation.success) {
-      res.status(400).json({ errors: validation.error.errors });
-      return;
-    }
+  if (!validation.success) {
+    res.status(400).json({ errors: validation.error.errors });
+    return;
+  }
 
+  try {
     const email: string = validation.data?.email;
     const password: string = validation.data?.password;
 

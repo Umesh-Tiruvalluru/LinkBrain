@@ -1,4 +1,5 @@
 import axios from "axios";
+import { DataProps } from "./types";
 const BACKEND_URL = "https://linkbrain.onrender.com/api/v1";
 
 export async function register(email: string, password: string) {
@@ -7,6 +8,13 @@ export async function register(email: string, password: string) {
     password: password,
   });
 
+  return response;
+}
+
+export async function onDelete(id: string) {
+  const response = await axios.delete(`${BACKEND_URL}/content/${id}`, {
+    headers: { Authorization: window.localStorage.getItem("jwt") },
+  });
   return response;
 }
 
@@ -20,25 +28,19 @@ export async function login(email: string, password: string) {
   return response;
 }
 
-export async function createContent(
-  title: string,
-  type: string,
-  tags: string[],
-  description: string,
-  link: string
-) {
+export async function createContent({
+  title,
+  type,
+  chips: tags,
+  description,
+  link,
+}: DataProps) {
   const response = await axios.post(
     `${BACKEND_URL}/content`,
-    {
-      title,
-      type,
-      tags,
-      description,
-      link,
-    },
+    { title, type, tags, description, link },
     {
       headers: { Authorization: localStorage.getItem("jwt") },
-    }
+    },
   );
 
   return response;
@@ -58,7 +60,7 @@ export async function share(share: boolean) {
     {
       share: share,
     },
-    { headers: { Authorization: window.localStorage.getItem("jwt") } }
+    { headers: { Authorization: window.localStorage.getItem("jwt") } },
   );
 
   return response.data.hash;
@@ -73,10 +75,6 @@ export async function isLinkExist() {
 }
 
 export async function getShareData(shareId: string) {
-  if (!shareId) {
-    return;
-  }
   const response = await axios.get(`${BACKEND_URL}/brain/${shareId}`);
-
   return response;
 }

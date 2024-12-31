@@ -8,6 +8,8 @@ contentRouter.post("/content", userMiddleware, async (req, res) => {
   const { title, type, link, tags, description } = req.body;
   const timestamp: number = Date.now();
 
+  console.log(tags);
+
   const tagIds = await Promise.all(
     tags.map(async (tag: string) => {
       let t = await TagsModel.findOne({ tag });
@@ -17,9 +19,9 @@ contentRouter.post("/content", userMiddleware, async (req, res) => {
         console.log(t);
       }
       return t._id;
-    })
+    }),
   );
-        
+
   await ContentModel.create({
     title,
     link,
@@ -38,7 +40,7 @@ contentRouter.get("/content", userMiddleware, async (req, res) => {
   const userId = req.userId;
   const content = await ContentModel.find({ userId }).populate(
     "tags userId",
-    "tag email"
+    "tag email",
   );
 
   res.json({ content });
@@ -57,7 +59,7 @@ contentRouter.delete(
     } catch (e) {
       res.status(403).json({ error: e });
     }
-  }
+  },
 );
 
 export default contentRouter;

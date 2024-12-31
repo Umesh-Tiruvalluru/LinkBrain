@@ -5,13 +5,14 @@ import contentRouter from "./routes/contentRoutes";
 import shareRouter from "./routes/shareRouter";
 import cors from "cors";
 import * as dotenv from "dotenv";
+
 const app = express();
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors()); //Update
 
 dotenv.config();
-const port = process.env.PORT || 4000;
 
 if (!process.env.JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined");

@@ -1,9 +1,11 @@
 import Logo from "./Logo";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { LogOut, Menu, Search, SlidersHorizontal, X } from "lucide-react";
+
 import Button from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Filter from "./Filter";
 
 const Navbar = () => {
   const [translate, setTranslate] = useState<boolean>(false);
@@ -16,7 +18,7 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      window.innerWidth >= 768 && setTranslate(false);
+      return window.innerWidth >= 768 && setTranslate(() => false);
     });
   });
 
@@ -42,12 +44,7 @@ const Navbar = () => {
 
             <div className="h-8 w-px bg-zinc-300 hidden sm:block" />
 
-            <Button
-              startIcon={<SlidersHorizontal className="h-3.5 w-3.5" />}
-              className="text-sm"
-              variant="secondary"
-              text="Filters"
-            />
+            <Filter />
 
             <Button
               startIcon={<LogOut className="h-3.5 w-3.5" />}

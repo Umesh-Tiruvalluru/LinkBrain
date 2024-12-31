@@ -2,16 +2,21 @@ import { CirclePlus, Share2 } from "lucide-react";
 import React from "react";
 import { getData } from "../api.tsx";
 import CardContainer from "../components/CardContainer";
-import CreateContentModal from "../components/CreateContentModal";
+import CreateContentModal from "../components/CreateContentModal.tsx";
 import MaxWidthWrapper from "../components/MaxWidthWrapper";
 import Navbar from "../components/Navbar";
 import Button from "../ui/Button";
 import ShareBrainModal from "../components/ShareBrainModal.js";
+import { useQuery } from "@tanstack/react-query";
 
 const Dashboard = () => {
   const [modal, setModal] = React.useState<boolean>(false);
-  const [data, setData] = React.useState([]);
   const [shareBrainModal, setShareBrainModal] = React.useState<boolean>(false);
+
+  const { data, isPending } = useQuery({
+    queryKey: ["content"],
+    queryFn: getData,
+  });
 
   function onClose() {
     setModal(false);
@@ -19,16 +24,6 @@ const Dashboard = () => {
 
   function close() {
     setShareBrainModal(false);
-  }
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
-    const content = await getData();
-    setData(content);
-    close();
   }
 
   return (
@@ -68,7 +63,7 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <CardContainer data={data} />
+          <CardContainer data={data} isPending={isPending} />
         </div>
       </MaxWidthWrapper>
     </div>

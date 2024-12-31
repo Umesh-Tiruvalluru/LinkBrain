@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
             : " hover:bg-purple-600/90 text-purple-800 hover:text-white font-bold transition-all duration-200"
         }
         px-4 py-2 flex items-center gap-2 rounded-lg border border-purple-950/20`,
-        className
+        className,
       )}
     >
       {startIcon}

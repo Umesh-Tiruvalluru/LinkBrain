@@ -6,7 +6,7 @@ interface InputChipProps {
   setChips: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const InputChip: React.FC<InputChipProps> = ({ chips, setChips }) => {
+const InputChip: React.FC<InputChipProps> = ({ chips, setChips }, props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleDelete(chipToDelete: string) {
@@ -39,7 +39,8 @@ const InputChip: React.FC<InputChipProps> = ({ chips, setChips }) => {
         <Chip key={index} onDelete={() => handleDelete(chip)} label={chip} />
       ))}
       <input
-        className="outline-none flex-grow min-w-[100px]"
+        className="outline-none flex-grow min-w-[100px] bg-transparent"
+        {...props}
         type="text"
         ref={inputRef}
         onKeyDown={handleInputKeyDown}
