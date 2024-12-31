@@ -21,10 +21,11 @@ userRouter.post("/register", async (req, res) => {
     res.status(400).json({ errors: validation.error.errors });
     return;
   }
-
+  // 2b$05$48YAnDjgRk/Xg1prKgr0zukHmoa/12DaVYFMLh9tHUpEznqVRMQbW
   try {
     const { email, password } = validation.data;
     const hashedPassword = await bcrypt.hash(password, 5);
+
     await UserModel.create({
       email,
       password: hashedPassword,
@@ -53,7 +54,10 @@ userRouter.post("/login", async (req, res) => {
       res.status(401).json({ message: "Invalid Credentials" });
       return;
     }
-    const passwordMatch = bcrypt.compare(password, existingEmail?.password!);
+    const passwordMatch = await bcrypt.compare(
+      password,
+      existingEmail?.password!,
+    );
 
     if (!passwordMatch) {
       res.status(401).json({ message: "Invalid Credentials" });
@@ -62,7 +66,7 @@ userRouter.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { id: existingEmail?._id },
-      process.env.JWT_SECRET || ""
+      process.env.JWT_SECRET || "",
     );
 
     res.status(200).json({ token });
