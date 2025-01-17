@@ -6,7 +6,7 @@ import { CardData } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { onDelete } from "../api";
 import toast from "react-hot-toast";
-import { XEmbed, YouTubeEmbed } from "react-social-media-embed";
+import { YouTubeEmbed } from "react-social-media-embed";
 
 interface CardProps {
   data: CardData;
@@ -54,11 +54,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
             />
           </div>
         )}
-        {data.type === "tweet" && (
+        {/* {data.type === "tweet" && (
           <div className="w-full">
             <XEmbed url={data.link} className="" />
           </div>
-        )}
+        )} */}
       </div>
       <div className="flex flex-wrap gap-2">
         {data.tags.map((tag, idx) => (

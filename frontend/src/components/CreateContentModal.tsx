@@ -31,8 +31,8 @@ const CreateContentModal: React.FC<CreateContentModalProps> = ({
   const [chips, setChips] = useState<string[]>([]);
 
   const onSubmit = (data: DataProps) => {
-    console.log({ ...data, chips });
     mutate({ ...data, chips: chips });
+    setChips([]);
     onClose();
   };
 
