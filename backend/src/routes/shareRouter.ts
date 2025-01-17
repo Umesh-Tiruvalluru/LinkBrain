@@ -39,8 +39,9 @@ shareRouter.post("/share", userMiddleware, async (req, res) => {
   }
 });
 
-shareRouter.get("/share", async (req, res) => {
+shareRouter.get("/share", userMiddleware, async (req, res) => {
   const userId = req.userId;
+
   try {
     const response = await LinkModel.find({ userId });
 
@@ -66,7 +67,7 @@ shareRouter.get("/:shareLink", async (req, res) => {
   }
   const content = await ContentModel.find({ userId: link.userId }).populate(
     "userId tags",
-    "email tag"
+    "email tag",
   );
 
   res.json({ content });

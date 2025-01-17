@@ -11,11 +11,10 @@ interface ShareBrainModalProps {
 }
 
 const ShareBrainModal: React.FC<ShareBrainModalProps> = ({ open, onClose }) => {
-  const [hash, setHash] = React.useState<string | undefined>(undefined);
+  const [hash, setHash] = React.useState<string>("");
 
   async function fetchHash() {
     const response = await isLinkExist();
-    console.log(response);
     setHash(response);
   }
 

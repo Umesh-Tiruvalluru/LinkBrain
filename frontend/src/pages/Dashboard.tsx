@@ -30,7 +30,7 @@ const Dashboard = () => {
     <div className="bg-gray-200">
       <Navbar />
       {/* <Sidebar /> */}
-      <MaxWidthWrapper>
+      <MaxWidthWrapper className="pb-12">
         <div className="mt-11 space-y-8 min-h-screen">
           <CreateContentModal
             // setData={setData}

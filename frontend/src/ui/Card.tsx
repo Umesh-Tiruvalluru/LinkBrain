@@ -6,6 +6,7 @@ import { CardData } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { onDelete } from "../api";
 import toast from "react-hot-toast";
+import { XEmbed, YouTubeEmbed } from "react-social-media-embed";
 
 interface CardProps {
   data: CardData;
@@ -22,17 +23,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
     },
   });
 
-  function correctedLink(link: string): string {
-    if (link.includes("youtu.be")) {
-      return link.replace("youtu.be/", "youtube.com/embed/");
-    } else if (link.includes("youtube.com/watch")) {
-      return link.replace("youtube.com/watch?v=", "youtube.com/embed/");
-    }
-    return link;
-  }
-
   return (
-    <div className="bg-white h-auto rounded-lg p-4 shadow-md border border-neutral-300 flex flex-col">
+    <div className="bg-white w-full sm:max-w-[300px] rounded-lg p-4 shadow-md border border-neutral-300 flex flex-col">
       <div className="mb-1">
         <div className="flex items-center justify-between">
           <h1 className="font-bold uppercase">{data.title}</h1>
@@ -50,23 +42,22 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </time>
       </div>
       <p className="text-gray-500 mb-4 flex-grow">{data.description}</p>
-      <div className="mb-4 max-h-44 overflow-x-clip overflow-y-hidden">
+      <div className="mb-4 flex justify-center">
+        {/* Youtube Embed */}
         {data.type === "youtube" && (
-          <div className="aspect-w-16 aspect-h-9">
-            <iframe
-              className="w-full h-full rounded"
-              src={correctedLink(data.link)}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+          <div className="w-full h-full">
+            <YouTubeEmbed
+              url={data.link}
+              className=""
+              width="100%"
+              height={150}
+            />
           </div>
         )}
         {data.type === "tweet" && (
-          <blockquote className="twitter-tweet">
-            <a href={data.link.replace("x.com", "twitter.com")}></a>
-          </blockquote>
+          <div className="w-full">
+            <XEmbed url={data.link} className="" />
+          </div>
         )}
       </div>
       <div className="flex flex-wrap gap-2">

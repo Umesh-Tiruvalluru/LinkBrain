@@ -21,7 +21,6 @@ userRouter.post("/register", async (req, res) => {
     res.status(400).json({ errors: validation.error.errors });
     return;
   }
-  // 2b$05$48YAnDjgRk/Xg1prKgr0zukHmoa/12DaVYFMLh9tHUpEznqVRMQbW
   try {
     const { email, password } = validation.data;
     const hashedPassword = await bcrypt.hash(password, 5);
