@@ -3,7 +3,7 @@ import Card from "../ui/Card";
 import { CardData } from "../types";
 import { useSearchParams } from "react-router-dom";
 import { Loader } from "lucide-react";
-// import WaterfallLayout from "./WaterfallLayout";
+import WaterfallLayout from "./WaterfallLayout";
 
 interface CardContainerProps {
   data: CardData[];
@@ -31,13 +31,13 @@ const CardContainer: React.FC<CardContainerProps> = ({ data, isPending }) => {
   }
 
   return (
-    <div>
+    <WaterfallLayout>
       {filteredData.map((card) => (
         <div key={card._id} className="w-full" style={{ breakInside: "avoid" }}>
           <Card data={card} />
         </div>
       ))}
-    </div>
+    </WaterfallLayout>
   );
 };
 
