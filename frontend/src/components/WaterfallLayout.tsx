@@ -11,9 +11,9 @@ interface BreakpointConfig {
 }
 
 const breakpoints: BreakpointConfig[] = [
-  { breakpoint: 640, columns: 1 }, // sm
-  { breakpoint: 1024, columns: 2 }, // lg
-  { breakpoint: 1280, columns: 3 }, // xl
+  { breakpoint: 640, columns: 1 },
+  { breakpoint: 1024, columns: 2 },
+  { breakpoint: 1280, columns: 3 },
   { breakpoint: Infinity, columns: 4 },
 ];
 
