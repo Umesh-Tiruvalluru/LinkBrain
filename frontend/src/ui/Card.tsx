@@ -6,7 +6,7 @@ import { CardData } from "../types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { onDelete } from "../api";
 import toast from "react-hot-toast";
-import { YouTubeEmbed } from "react-social-media-embed";
+import { Tweet } from "react-tweet";
 
 interface CardProps {
   data: CardData;
@@ -22,6 +22,22 @@ const Card: React.FC<CardProps> = ({ data }) => {
       toast.success("Successfully Deleted");
     },
   });
+
+  function correctedLink(link: string): string {
+    if (link.includes("youtu.be")) {
+      return link.replace("youtu.be/", "youtube.com/embed/");
+    } else if (link.includes("youtube.com/watch")) {
+      return link.replace("youtube.com/watch?v=", "youtube.com/embed/");
+    }
+    return link;
+  }
+
+  const getTweetId = (url: string): string => {
+    // Handle both twitter.com and x.com URLs
+    const regex = /(?:twitter|x)\.com\/\w+\/status\/(\d+)/;
+    const match = url.match(regex);
+    return match ? match[1] : "";
+  };
 
   return (
     <div className="bg-white w-full sm:max-w-[300px] rounded-lg p-4 shadow-md border border-neutral-300 flex flex-col">
@@ -42,19 +58,23 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </time>
       </div>
       <p className="text-gray-500 mb-4 flex-grow">{data.description}</p>
-      <div className="mb-4 flex justify-center">
-        {/* Youtube Embed */}
+      <div className="mb-4 overflow-hidden">
         {data.type === "youtube" && (
-          <div className="w-full h-full">
-            <YouTubeEmbed url={data.link} width="100%" height={150} />
+          <div className="aspect-w-16 aspect-h-9">
+            <iframe
+              className="w-full h-full rounded"
+              src={correctedLink(data.link)}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         )}
         {data.type === "tweet" && (
-          <blockquote className="twitter-tweet">
-            <a href={data.link.replace("x.com", "twitter.com")}>
-              https://t.co/qUfMwkjr41
-            </a>
-          </blockquote>
+          <div className="light test">
+            <Tweet id={getTweetId(data.link)} />
+          </div>
         )}
       </div>
       <div className="flex flex-wrap gap-2">

@@ -19,6 +19,7 @@
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^7.1.0",
     "react-social-media-embed": "^2.5.17",
+    "react-tweet": "^3.2.1",
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
