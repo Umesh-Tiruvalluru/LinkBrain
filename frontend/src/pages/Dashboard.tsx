@@ -13,10 +13,16 @@ const Dashboard = () => {
   const [modal, setModal] = React.useState<boolean>(false);
   const [shareBrainModal, setShareBrainModal] = React.useState<boolean>(false);
 
-  const { data, isPending, isError } = useQuery({
+  const {
+    data = {},
+    isPending,
+    isError,
+  } = useQuery({
     queryKey: ["content"],
     queryFn: getData,
   });
+
+  console.log(data);
 
   function onClose() {
     setModal(false);
