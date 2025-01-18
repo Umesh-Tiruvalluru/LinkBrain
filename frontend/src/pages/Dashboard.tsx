@@ -6,8 +6,8 @@ import CreateContentModal from "../components/CreateContentModal.tsx";
 import MaxWidthWrapper from "../components/MaxWidthWrapper";
 import Navbar from "../components/Navbar";
 import Button from "../ui/Button";
-import ShareBrainModal from "../components/ShareBrainModal.js";
 import { useQuery } from "@tanstack/react-query";
+import ShareBrainModal from "../components/ShareBrainModal.tsx";
 
 const Dashboard = () => {
   const [modal, setModal] = React.useState<boolean>(false);
