@@ -22,8 +22,6 @@ const Dashboard = () => {
     queryFn: getData,
   });
 
-  console.log(data);
-
   function onClose() {
     setModal(false);
   }

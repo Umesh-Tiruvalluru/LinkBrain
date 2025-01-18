@@ -2,8 +2,9 @@ import React from "react";
 import Card from "../ui/Card";
 import { CardData } from "../types";
 import { useSearchParams } from "react-router-dom";
-import { Loader } from "lucide-react";
+
 import WaterfallLayout from "./WaterfallLayout";
+import Loader from "../ui/Loader";
 
 interface CardContainerProps {
   data: CardData[];
