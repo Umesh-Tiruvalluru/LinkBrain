@@ -36,7 +36,6 @@ const WaterfallLayout: React.FC<WaterfallLayoutProps> = ({
   }, []);
 
   const distributeItems = (): ReactNode[][] => {
-    // Create array of empty arrays with explicit typing
     const cols: ReactNode[][] = Array.from({ length: columns }, () => []);
 
     // Convert children to array and distribute
