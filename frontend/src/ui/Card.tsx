@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { onDelete } from "../api";
 import toast from "react-hot-toast";
 import { XEmbed, YouTubeEmbed } from "react-social-media-embed";
+import Loader from "./Loader";
 
 interface CardProps {
   data: CardData;
@@ -51,9 +52,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
         )}
 
         {data.type === "tweet" && (
-          <div className="">
-            <XEmbed url={data.link.replace("x.com", "twitter.com")} />
-          </div>
+          <React.Suspense fallback={<Loader />}>
+            <div className="">
+              <XEmbed url={data.link.replace("x.com", "twitter.com")} />
+            </div>
+          </React.Suspense>
         )}
       </div>
       <div className="flex flex-wrap gap-2">
