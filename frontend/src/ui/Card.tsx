@@ -55,7 +55,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           </div>
         )}
         {data.type === "tweet" && (
-          <div className="w-full">
+          <div className="">
             <XEmbed
               url={data.link.replace("x.com", "twitter.com")}
               className=""
