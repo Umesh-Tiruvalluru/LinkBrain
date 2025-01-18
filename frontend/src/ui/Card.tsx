@@ -46,20 +46,13 @@ const Card: React.FC<CardProps> = ({ data }) => {
         {/* Youtube Embed */}
         {data.type === "youtube" && (
           <div className="w-full h-full">
-            <YouTubeEmbed
-              url={data.link}
-              className=""
-              width="100%"
-              height={150}
-            />
+            <YouTubeEmbed url={data.link} width="100%" height={150} />
           </div>
         )}
+
         {data.type === "tweet" && (
           <div className="">
-            <XEmbed
-              url={data.link.replace("x.com", "twitter.com")}
-              className=""
-            />
+            <XEmbed url={data.link.replace("x.com", "twitter.com")} />
           </div>
         )}
       </div>
