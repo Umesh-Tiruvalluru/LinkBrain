@@ -15,7 +15,11 @@ const CardContainer: React.FC<CardContainerProps> = ({ data, isPending }) => {
   const [searchParams] = useSearchParams();
 
   if (isPending) {
-    return <Loader />;
+    return (
+      <div>
+        <Loader />;
+      </div>
+    );
   }
 
   const filteredValue = searchParams.get("filter") || "all";

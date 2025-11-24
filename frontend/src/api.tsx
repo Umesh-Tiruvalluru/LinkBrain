@@ -1,6 +1,8 @@
 import axios from "axios";
 import { DataProps } from "./types";
-const BACKEND_URL = "https://linkbrain-api.onrender.com/api/v1";
+
+const BACKEND_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:4000/api/v1";
 
 export async function register(email: string, password: string) {
   const response = await axios.post(`${BACKEND_URL}/register`, {

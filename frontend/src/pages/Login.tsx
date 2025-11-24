@@ -41,7 +41,7 @@ export default function Login() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <div className="w-[50%] hidden lg:block">
+      <div className="w-[40%] m-4 rounded-md  hidden lg:block">
         <WelcomeBanner />
       </div>
       <div className="flex w-full lg:w-[50%] items-center justify-center p-8">
